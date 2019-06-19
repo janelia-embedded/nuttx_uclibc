@@ -322,13 +322,17 @@ echo "Installing uClibc++ in the NuttX source tree"
 filelist=`find libxx -type f`
 
 for file in $filelist; do
-  install -D $file ${libs_path}/${file}
+  install_path=${libs_path}/`dirname $file`
+  mkdir -p ${install_path}
+  cp $file ${install_path}
 done
 
 filelist=`find include -type f`
 
 for file in $filelist; do
-  install -D $file ${nuttx_path}/${file}
+  install_path=${nuttx_path}/`dirname $file`
+  mkdir -p ${install_path}
+  cp $file ${nuttx_path}/${file}
 done
 
 echo "Installation succeeded"
