@@ -48,6 +48,9 @@ CXXSRCS += utility.cxx valarray.cxx vector.cxx
 
 ifeq ($(CONFIG_UCLIBCXX_EXCEPTION),y)
 CXXSRCS += exception.cxx func_exception.cxx stdexcept.cxx
+else ifeq ($(CONFIG_UCLIBCXX_HAVE_LIBSUPCXX),y)
+# Using libsupc++, but not using exceptions, so terminate() implementation is still necessary
+CXXSRCS += eh_terminate.cxx 
 endif
 
 # libsupc++ replacement
